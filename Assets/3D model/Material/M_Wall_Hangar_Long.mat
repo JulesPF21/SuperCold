@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Wall_Hangar_3
+  m_Name: M_Wall_Hangar_Long
   m_Shader: {fileID: 4800000, guid: 933532a4fcc9baf4fa0491de14d08ed7, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -28,11 +28,11 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _BaseMap:
-        m_Texture: {fileID: 2800000, guid: 6e1cd79ad8ee5d64fa9379b2fe33b4da, type: 3}
+        m_Texture: {fileID: 2800000, guid: a64bba88cb02c5c44b30c0605557d641, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
-        m_Texture: {fileID: 2800000, guid: 27f02216914e84d439a02dc3d21e192c, type: 3}
+        m_Texture: {fileID: 2800000, guid: 4b59443146720ec41ba03970cafd6bbf, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _DetailAlbedoMap:
@@ -52,11 +52,11 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 6e1cd79ad8ee5d64fa9379b2fe33b4da, type: 3}
+        m_Texture: {fileID: 2800000, guid: a64bba88cb02c5c44b30c0605557d641, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
-        m_Texture: {fileID: 2800000, guid: e98d54c5d4856974baf147fa5c3129bd, type: 3}
+        m_Texture: {fileID: 2800000, guid: fc564c851d7b5854ba72dc7600ef676b, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _OcclusionMap:
@@ -124,7 +124,7 @@ Material:
     - _SpecColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
---- !u!114 &4887968610933715879
+--- !u!114 &8206003712644207370
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
