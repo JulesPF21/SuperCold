@@ -16,7 +16,8 @@ TagManager:
   - Wood (Static)
   - Dirt (Static)
   - Wood
-  - WhiteImage
+  - Bullet
+  - PlayerHealthBar
   layers:
   - Default
   - TransparentFX
