@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "com.sakana3.probuilderhelpermenu": "https://github.com/sakana3/ProBuilderHelperMenu.git?path=package",
     "com.unity.2d.enhancers": "1.0.0",
     "com.unity.2d.sprite": "1.0.0",
     "com.unity.2d.tilemap": "1.0.0",
