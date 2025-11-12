@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using Unity.FPS.Game;
 using UnityEngine;
 
@@ -63,6 +64,7 @@ namespace Unity.FPS.Gameplay
         Vector3 m_TrajectoryCorrectionVector;
         Vector3 m_ConsumedTrajectoryCorrectionVector;
         List<Collider> m_IgnoredColliders;
+        
 
         const QueryTriggerInteraction k_TriggerInteraction = QueryTriggerInteraction.Collide;
 
@@ -74,7 +76,8 @@ namespace Unity.FPS.Gameplay
 
             m_ProjectileBase.OnShoot += OnShoot;
 
-            Destroy(gameObject, MaxLifeTime);
+            StartCoroutine(LifeCoroutine());
+
         }
 
         new void OnShoot()
@@ -264,6 +267,16 @@ namespace Unity.FPS.Gameplay
         {
             Gizmos.color = RadiusColor;
             Gizmos.DrawSphere(transform.position, Radius);
+        }
+        private IEnumerator LifeCoroutine()
+        {
+            float elapsed = 0f;
+            while (elapsed < MaxLifeTime)
+            {
+                    elapsed += Time.deltaTime;
+                yield return null;
+            }
+            Destroy(gameObject);
         }
     }
 }

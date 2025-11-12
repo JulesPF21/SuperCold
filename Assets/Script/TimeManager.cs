@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.FPS.Gameplay;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class TimeManager : MonoBehaviour
 {
@@ -9,78 +11,60 @@ public class TimeManager : MonoBehaviour
     public float freeMovementDuration = 1f; 
     public GameObject player1;
     public GameObject player2;
-
+    public static bool isTimeFrozen = false;
+    
     private GameObject currentPlayer;
     private GameObject otherPlayer;
     private List<FreezeableProjectile> frozenProjectiles = new List<FreezeableProjectile>();
 
+    private enum Phase { PlayerTurn, ProjectilePhase }
+    private Phase currentPhase = Phase.PlayerTurn;
+    
+    
     private void Start()
     {
+        Time.timeScale = 0.3f;
         StartTurn(player1, player2);
     }
-
+    
     private void StartTurn(GameObject activePlayer, GameObject waitingPlayer)
     {
         currentPlayer = activePlayer;
         otherPlayer = waitingPlayer;
         StartCoroutine(TurnCoroutine());
     }
-
+    
     private IEnumerator TurnCoroutine()
     {
-        FreezePlayer(otherPlayer);  
+        
+        currentPhase = Phase.PlayerTurn;
+        SetPlayerInput(otherPlayer, false);
+        SetPlayerInput(currentPlayer, true);
+        isTimeFrozen = true;
+
         yield return new WaitForSecondsRealtime(freezeDuration);
 
-        UnfreezePlayer(otherPlayer);
+        
+        currentPhase = Phase.ProjectilePhase;
+        SetPlayerInput(otherPlayer, false);
+        SetPlayerInput(currentPlayer, false);
+        isTimeFrozen = false; 
+
         yield return new WaitForSecondsRealtime(freeMovementDuration);
 
+        
         StartTurn(otherPlayer, currentPlayer);
     }
-
-    private void FreezePlayer(GameObject player)
+    private void SetPlayerInput(GameObject player, bool active)
     {
-       
-        foreach (var script in player.GetComponents<MonoBehaviour>())
-        {
-            if (script != this) 
-                script.enabled = false;
-        }
-        Rigidbody rb = player.GetComponent<Rigidbody>();
-        if (rb != null)
-        {
-            rb.isKinematic = true; 
-        }
-
-
-        // Geler les projectiles
-        frozenProjectiles.Clear();
-        foreach (var proj in FindObjectsOfType<FreezeableProjectile>())
-        {
-            proj.Freeze();
-            frozenProjectiles.Add(proj);
-        }
-    }
-
-    private void UnfreezePlayer(GameObject player)
-    {
+        player.GetComponent<PlayerCharacterController>().enabled = active;
+        player.GetComponent<PlayerWeaponsManager>().enabled = active;
         
-        foreach (var script in player.GetComponents<MonoBehaviour>())
-        {
-            if (script != this)
-                script.enabled = true;
-        }
-        Rigidbody rb = player.GetComponent<Rigidbody>();
+        
+        var rb = player.GetComponent<Rigidbody>();
         if (rb != null)
         {
-            rb.isKinematic = false; 
+            rb.isKinematic = !active;
         }
-
-
-        foreach (var proj in frozenProjectiles)
-        {
-            if (proj != null)
-                proj.Unfreeze();
-        }
-        frozenProjectiles.Clear();
     }
 }

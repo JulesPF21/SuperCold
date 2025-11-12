@@ -9,19 +9,23 @@ namespace Unity.FPS.UI
     {
         [Tooltip("Image component dispplaying current health")]
         public Image HealthFillImage;
-
+        
         Health m_PlayerHealth;
-
+        public PlayerCharacterController playerCharacterController;
         void Start()
         {
-            PlayerCharacterController playerCharacterController =
-                GameObject.FindFirstObjectByType<PlayerCharacterController>();
-            DebugUtility.HandleErrorIfNullFindObject<PlayerCharacterController, PlayerHealthBar>(
-                playerCharacterController, this);
+            if (playerCharacterController == null)
+            {
+                Debug.LogError("Pas de joueur assigné à la PlayerHealthBar !");
+                return;
+            }
 
             m_PlayerHealth = playerCharacterController.GetComponent<Health>();
-            DebugUtility.HandleErrorIfNullGetComponent<Health, PlayerHealthBar>(m_PlayerHealth, this,
-                playerCharacterController.gameObject);
+            if (m_PlayerHealth == null)
+            {
+                Debug.LogError("Pas de composant Health sur le joueur assigné !");
+                return;
+            }
         }
 
         void Update()
