@@ -4,23 +4,28 @@ using UnityEngine;
 public class ModularArray : MonoBehaviour
 {
     [Header("Prefab Settings")]
-    public GameObject prefab;                     // L'asset à dupliquer
+    public GameObject prefab; // L'asset à dupliquer
 
     [Header("Array Dimensions")]
-    [Min(1)] public int countX = 3;               // Nombre de modules sur l'axe X (horizontal)
-    [Min(1)] public int countY = 1;               // Nombre de modules sur l'axe Y (vertical)
-    public Vector3 offsetX = new Vector3(4, 0, 0); // Espacement horizontal
-    public Vector3 offsetY = new Vector3(0, 2, 0); // Espacement vertical
+    [Min(1)] public int countX = 3;
+    [Min(1)] public int countY = 1;
+    public Vector3 offsetX = new Vector3(4, 0, 0);
+    public Vector3 offsetY = new Vector3(0, 2, 0);
 
     [Header("Transform Options")]
-    public Vector3 rotationOffset = Vector3.zero; // Rotation appliquée à chaque instance
-    public Vector3 scaleMultiplier = Vector3.one; // Échelle des instances
+    public Vector3 rotationOffset = Vector3.zero;
+    public Vector3 scaleMultiplier = Vector3.one;
+
+    [Header("Collider Options")]
+    public bool addCollider = false;              // Active ou désactive l’ajout automatique de colliders
+    public bool useMeshCollider = false;          // Si true, ajoute un MeshCollider au lieu d’un BoxCollider
+    public bool convexMeshCollider = false;       // Si MeshCollider, permet de le rendre convexe
 
     [Header("Options")]
-    public bool autoUpdate = true;                // Mise à jour automatique
-    public bool regenerateNow = false;            // Forcer la régénération manuelle
+    public bool autoUpdate = true;
+    public bool regenerateNow = false;
 
-    // Variables internes pour détection des changements
+    // Variables internes
     private GameObject lastPrefab;
     private int lastCountX;
     private int lastCountY;
@@ -28,6 +33,9 @@ public class ModularArray : MonoBehaviour
     private Vector3 lastOffsetY;
     private Vector3 lastRotationOffset;
     private Vector3 lastScaleMultiplier;
+    private bool lastAddCollider;
+    private bool lastUseMeshCollider;
+    private bool lastConvexMeshCollider;
 
     private void Update()
     {
@@ -65,7 +73,10 @@ public class ModularArray : MonoBehaviour
                offsetX != lastOffsetX ||
                offsetY != lastOffsetY ||
                rotationOffset != lastRotationOffset ||
-               scaleMultiplier != lastScaleMultiplier;
+               scaleMultiplier != lastScaleMultiplier ||
+               addCollider != lastAddCollider ||
+               useMeshCollider != lastUseMeshCollider ||
+               convexMeshCollider != lastConvexMeshCollider;
     }
 
     private void SaveState()
@@ -77,6 +88,9 @@ public class ModularArray : MonoBehaviour
         lastOffsetY = offsetY;
         lastRotationOffset = rotationOffset;
         lastScaleMultiplier = scaleMultiplier;
+        lastAddCollider = addCollider;
+        lastUseMeshCollider = useMeshCollider;
+        lastConvexMeshCollider = convexMeshCollider;
     }
 
     public void GenerateArray()
@@ -93,7 +107,7 @@ public class ModularArray : MonoBehaviour
                 DestroyImmediate(transform.GetChild(i).gameObject);
         }
 
-        // Génération du mur
+        // Génération des instances
         for (int y = 0; y < countY; y++)
         {
             for (int x = 0; x < countX; x++)
@@ -101,14 +115,42 @@ public class ModularArray : MonoBehaviour
                 GameObject instance = Instantiate(prefab, transform);
                 instance.SetActive(true);
 
-                // Calcul de la position
+                // Position / rotation / échelle
                 Vector3 position = offsetX * x + offsetY * y;
                 instance.transform.localPosition = position;
                 instance.transform.localRotation = Quaternion.Euler(rotationOffset);
                 instance.transform.localScale = scaleMultiplier;
 
                 instance.name = $"{prefab.name}_{y}_{x}";
+
+                // === AJOUT AUTOMATIQUE DE COLLIDER ===
+                if (addCollider)
+                {
+                    AddColliderIfMissing(instance);
+                }
             }
+        }
+    }
+
+    private void AddColliderIfMissing(GameObject obj)
+    {
+        // Vérifie s’il existe déjà un collider
+        if (obj.GetComponent<Collider>() != null || obj.GetComponentInChildren<Collider>() != null)
+            return;
+
+        if (useMeshCollider)
+        {
+            MeshFilter meshFilter = obj.GetComponentInChildren<MeshFilter>();
+            if (meshFilter != null)
+            {
+                MeshCollider mc = obj.AddComponent<MeshCollider>();
+                mc.sharedMesh = meshFilter.sharedMesh;
+                mc.convex = convexMeshCollider;
+            }
+        }
+        else
+        {
+            obj.AddComponent<BoxCollider>();
         }
     }
 
