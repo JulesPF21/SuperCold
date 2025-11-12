@@ -2,19 +2,27 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Interface;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class FireBall : MonoBehaviour
 {
     [SerializeField] private float radius;
+    [SerializeField] private GameObject VFXprefab;
+    [SerializeField] private GameObject VFXground;
+    private GameObject vfx;
+    private GameObject groundVfx;
     private Rigidbody rb;
     private MeshRenderer meshRenderer;
     private void OnCollisionEnter(Collision other)
     {
         rb.isKinematic = true;
         meshRenderer.enabled = false;
-        
+        vfx = Instantiate(VFXprefab, transform.position, transform.rotation);
+        RaycastHit GroundFire;
+        if (Physics.Raycast(transform.position, Vector3.down, out GroundFire, radius))
+        {
+            groundVfx = Instantiate(VFXground, GroundFire.point, transform.rotation);
+        }
         List<IFlammable> list = new List<IFlammable>();
         
         Collider[] colliders = Physics.OverlapSphere(transform.position, radius);
@@ -46,6 +54,8 @@ public class FireBall : MonoBehaviour
         }
         
         flammable.StopBurning();
+        Destroy(vfx);
+        Destroy(groundVfx);
         Destroy(gameObject);
     }
 
