@@ -2,33 +2,59 @@ using UnityEngine;
 
 public class FreezeableProjectile : MonoBehaviour
 {
-    public Rigidbody rb;
-    private Vector3 savedVelocity;
+    private Rigidbody rb;
     private bool isFrozen = false;
+    private Vector3 savedVelocity;
+    private Vector3 savedAngularVelocity;
 
-    void Awake()
+    private void Awake()
     {
         rb = GetComponent<Rigidbody>();
     }
 
-    void FixedUpdate()
+    private void Update()
     {
-        if (isFrozen)
-            rb.linearVelocity = Vector3.zero;
-        else
-            savedVelocity = rb.linearVelocity;
+        if (TimeManager.isTimeFrozen && !isFrozen)
+        {
+            Freeze();
+        }
+        else if (!TimeManager.isTimeFrozen && isFrozen)
+        {
+            Unfreeze();
+        }
     }
 
     public void Freeze()
     {
+        if (isFrozen) return;
         isFrozen = true;
-        rb.isKinematic = true;
+
+        if (rb != null)
+        {
+            // On enregistre la vitesse et on stoppe tout
+            savedVelocity = rb.linearVelocity;
+            savedAngularVelocity = rb.angularVelocity;
+
+            rb.linearVelocity = Vector3.zero;
+            rb.angularVelocity = Vector3.zero;
+
+            rb.collisionDetectionMode = CollisionDetectionMode.Discrete;
+            rb.isKinematic = true;
+        }
     }
 
     public void Unfreeze()
     {
+        if (!isFrozen) return;
         isFrozen = false;
-        rb.isKinematic = false;
-        rb.linearVelocity = savedVelocity;
+
+        if (rb != null)
+        {
+            rb.isKinematic = false;
+            rb.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic;
+
+            rb.linearVelocity = savedVelocity;
+            rb.angularVelocity = savedAngularVelocity;
+        }
     }
 }
