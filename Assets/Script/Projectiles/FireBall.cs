@@ -20,6 +20,7 @@ public class FireBall : MonoBehaviour
         meshRenderer.enabled = false;
         vfx = Instantiate(VFXprefab, transform.position, transform.rotation);
         RaycastHit GroundFire;
+        StartCoroutine(Hit());
         if (Physics.Raycast(transform.position, Vector3.down, out GroundFire, radius))
         {
             groundVfx = Instantiate(VFXground, GroundFire.point, transform.rotation);
@@ -41,7 +42,7 @@ public class FireBall : MonoBehaviour
                 StartCoroutine(SetFireTo(flammable));
             }
     }
-
+    
     private IEnumerator SetFireTo(IFlammable flammable)
     {
         float timer = 0f;
@@ -55,6 +56,14 @@ public class FireBall : MonoBehaviour
         }
         
         flammable.StopBurning();
+        Destroy(vfx);
+        Destroy(groundVfx);
+        Destroy(gameObject);
+    }
+
+    private IEnumerator Hit()
+    {
+        yield return new WaitForSeconds(5f);
         Destroy(vfx);
         Destroy(groundVfx);
         Destroy(gameObject);

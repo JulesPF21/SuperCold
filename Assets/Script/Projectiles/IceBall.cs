@@ -8,7 +8,8 @@ public class IceBall : MonoBehaviour
 {
     [SerializeField] private float radius;
     [SerializeField] private float frozeTime;
-    
+
+    private bool isStatic;
     private Rigidbody rb;
     private MeshRenderer meshRenderer;
     private void OnCollisionEnter(Collision other)
@@ -40,10 +41,18 @@ public class IceBall : MonoBehaviour
         while (timer < frozeTime)
         {
             timer += Time.deltaTime;
-            
+            if (icable.RigidBody.isKinematic == false)
+            {
+                isStatic = false;
+                icable.RigidBody.isKinematic = true;
+            }
             yield return null;
         }
-        
+
+        if (isStatic == false)
+        {
+            icable.RigidBody.isKinematic = false;
+        }
         icable.UnFreeze();
         Destroy(gameObject);
     }
