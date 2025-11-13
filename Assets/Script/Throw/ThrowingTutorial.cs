@@ -63,6 +63,7 @@ public class ThrowingTutorial : MonoBehaviour
 
         // get rigidbody component
         Rigidbody projectileRb = projectile.GetComponent<Rigidbody>();
+        projectile.layer = LayerMask.NameToLayer("Player1");
 
         // calculate direction
         Vector3 forceDirection = cam.transform.forward;
