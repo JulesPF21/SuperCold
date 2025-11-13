@@ -14,6 +14,11 @@ public class TimeManager : MonoBehaviour
     public GameObject player2;
     public static bool isTimeFrozen = false;
     
+    [Header("Player HUDs")]
+    public GameObject player1HUD;
+    public GameObject player2HUD;
+    
+    [Header("Player")]
     private GameObject currentPlayer;
     private GameObject otherPlayer;
     private List<FreezeableProjectile> frozenProjectiles = new List<FreezeableProjectile>();
@@ -41,6 +46,7 @@ public class TimeManager : MonoBehaviour
         currentPhase = Phase.PlayerTurn;
         SetPlayerInput(otherPlayer, false);
         SetPlayerInput(currentPlayer, true);
+        UpdateTurnIndicator(currentPhase);
         isTimeFrozen = true;
 
         yield return new WaitForSecondsRealtime(freezeDuration);
@@ -48,6 +54,7 @@ public class TimeManager : MonoBehaviour
         currentPhase = Phase.FreeTurn;
         SetPlayerInput(otherPlayer, true);
         SetPlayerInput(currentPlayer, true);
+        UpdateTurnIndicator(currentPhase);
         isTimeFrozen = true;
         
         yield return new WaitForSecondsRealtime(freeTime);
@@ -55,6 +62,7 @@ public class TimeManager : MonoBehaviour
         currentPhase = Phase.ProjectilePhase;
         SetPlayerInput(otherPlayer, false);
         SetPlayerInput(currentPlayer, false);
+        UpdateTurnIndicator(currentPhase);
         isTimeFrozen = false; 
 
         yield return new WaitForSecondsRealtime(freeMovementDuration);
@@ -72,6 +80,32 @@ public class TimeManager : MonoBehaviour
         if (rb != null)
         {
             rb.isKinematic = !active;
+        }
+    }
+    private void UpdateTurnIndicator(Phase phase)
+    {
+        switch (phase)
+        {
+            case Phase.PlayerTurn:
+                if (player1HUD != null)
+                    player1HUD.SetActive(currentPlayer == player1);
+                if (player2HUD != null)
+                    player2HUD.SetActive(currentPlayer == player2);
+                break;
+
+            case Phase.FreeTurn:
+                if (player1HUD != null)
+                    player1HUD.SetActive(true);
+                if (player2HUD != null)
+                    player2HUD.SetActive(true);
+                break;
+
+            case Phase.ProjectilePhase:
+                if (player1HUD != null)
+                    player1HUD.SetActive(false);
+                if (player2HUD != null)
+                    player2HUD.SetActive(false);
+                break;
         }
     }
 }
