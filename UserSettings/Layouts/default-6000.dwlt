@@ -19,7 +19,7 @@ MonoBehaviour:
     width: 1920
     height: 989
   m_ShowMode: 4
-  m_Title: Project
+  m_Title: Inspector
   m_RootView: {fileID: 3}
   m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
@@ -1823,7 +1823,7 @@ MonoBehaviour:
   m_Pos:
     serializedVersion: 2
     x: 0
-    y: 24
+    y: 79
     width: 299
     height: 683
   m_SerializedDataModeController:
@@ -1840,9 +1840,9 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 
+      m_SelectedIDs: d0dcffff
       m_LastClickedID: 0
-      m_ExpandedIDs: c0f9ffff
+      m_ExpandedIDs: 70f4ffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -1889,8 +1889,8 @@ MonoBehaviour:
     m_TextWithWhitespace: "Scene\u200B"
   m_Pos:
     serializedVersion: 2
-    x: 301
-    y: 24
+    x: 300
+    y: 79
     width: 1243
     height: 683
   m_SerializedDataModeController:
@@ -2537,9 +2537,9 @@ MonoBehaviour:
     m_GridAxis: 1
     m_gridOpacity: 0.5
   m_Rotation:
-    m_Target: {x: -0.18583746, y: 0.4887908, z: -0.107385874, w: -0.8456213}
+    m_Target: {x: -0.204274, y: 0.45244348, z: -0.10725375, w: -0.86146545}
     speed: 2
-    m_Value: {x: -0.18583746, y: 0.4887908, z: -0.10738587, w: -0.8456213}
+    m_Value: {x: -0.20410685, y: 0.45372176, z: -0.107556865, w: -0.8607604}
   m_Size:
     m_Target: 8.384003
     speed: 2
@@ -2655,7 +2655,7 @@ MonoBehaviour:
   m_Pos:
     serializedVersion: 2
     x: 0
-    y: 733
+    y: 788
     width: 1544
     height: 198
   m_SerializedDataModeController:
@@ -2680,7 +2680,7 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/3D model
+    - Assets/3D model/Material
     m_Globs: []
     m_ProductIds: 
     m_AnyWithAssetOrigin: 0
@@ -2690,16 +2690,16 @@ MonoBehaviour:
   m_ViewMode: 1
   m_StartGridSize: 16
   m_LastFolders:
-  - Assets/3D model
+  - Assets/3D model/Material
   m_LastFoldersGridSize: 16
   m_LastProjectPath: D:\Utilisateurs\ttchi\Documents\Git Kraken\SuperCold
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 143}
-    m_SelectedIDs: ccf40000
-    m_LastClickedID: 62668
-    m_ExpandedIDs: 0000000056f60000
+    scrollPos: {x: 0, y: 175}
+    m_SelectedIDs: f2f60000
+    m_LastClickedID: 63218
+    m_ExpandedIDs: 0000000056f60000cef60000f2f6000090f7000048f8000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -2760,18 +2760,18 @@ MonoBehaviour:
     m_ExpandedInstanceIDs: c623000000000000fa7e0000487300000e9800005e7100006071000018740000da780000ce780000fc6f00001070000008700000cc720000c88100006a7101004acb0100ccc100008c21010076c6000044ae000056040100
     m_RenameOverlay:
       m_UserAcceptedRename: 0
-      m_Name: 
-      m_OriginalName: 
+      m_Name: Green
+      m_OriginalName: Green
       m_EditFieldRect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 0
         height: 0
-      m_UserData: 0
+      m_UserData: 64252
       m_IsWaitingForDelay: 0
       m_IsRenaming: 0
-      m_OriginalEventType: 11
+      m_OriginalEventType: 0
       m_IsRenamingFilename: 1
       m_TrimLeadingAndTrailingWhitespace: 0
       m_ClientGUIView: {fileID: 11}
@@ -2782,7 +2782,7 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
     m_NewAssetIndexInList: -1
-    m_ScrollPosition: {x: 0, y: 0}
+    m_ScrollPosition: {x: 0, y: 360}
     m_GridSize: 16
   m_SkipHiddenPackages: 0
   m_DirectoriesAreaWidth: 195
@@ -2987,8 +2987,8 @@ MonoBehaviour:
     m_TextWithWhitespace: "Inspector\u200B"
   m_Pos:
     serializedVersion: 2
-    x: 1546
-    y: 24
+    x: 1545
+    y: 79
     width: 374
     height: 907
   m_SerializedDataModeController:
