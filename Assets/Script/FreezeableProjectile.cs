@@ -1,4 +1,6 @@
 using UnityEngine;
+using System.Collections;
+using System.Collections.Generic;
 
 public class FreezeableProjectile : MonoBehaviour
 {
@@ -31,7 +33,6 @@ public class FreezeableProjectile : MonoBehaviour
 
         if (rb != null)
         {
-            // On enregistre la vitesse et on stoppe tout
             savedVelocity = rb.linearVelocity;
             savedAngularVelocity = rb.angularVelocity;
 
@@ -53,8 +54,13 @@ public class FreezeableProjectile : MonoBehaviour
             rb.isKinematic = false;
             rb.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic;
 
+            
             rb.linearVelocity = savedVelocity;
             rb.angularVelocity = savedAngularVelocity;
+            
         }
+        
     }
+    
+    
 }

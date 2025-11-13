@@ -8,7 +8,7 @@ namespace Unity.FPS.Gameplay
     {
         
         [Header("Paramètres généraux")]
-        public float life = 3f;
+        public float life = 1000f;
         public float speed = 20f;
         public float damage = 25f;
         
@@ -17,41 +17,45 @@ namespace Unity.FPS.Gameplay
         public float impactVFXLifetime = 2f;
     
         private Vector3 m_Velocity;
-    
+
+        private Rigidbody rb;
         private void Awake()
         {
-            // Détruire la balle après un certain temps
             Destroy(gameObject, life);
+            rb = GetComponent<Rigidbody>();
         }
     
         private void OnEnable()
         {
-            // Calculer la direction initiale
             m_Velocity = transform.forward * speed;
         }
     
-        void Update()
+        void FixedUpdate()
         {
-            // Déplacement linéaire de la balle
-            transform.position += m_Velocity * Time.deltaTime;
+            
+            if(rb.isKinematic)
+                return;
+            
+            rb.linearVelocity = m_Velocity;
         }
     
         private void OnCollisionEnter(Collision collision)
         {
+            if (collision.gameObject.CompareTag(gameObject.tag))
+                return;
+            
             Damageable target = collision.collider.GetComponent<Damageable>();
             if (target != null)
             {
                 target.InflictDamage(damage, false, gameObject);
             }
-    
-            // Effet visuel d’impact (optionnel)
+            
             if (impactVFX != null)
             {
                 GameObject vfx = Instantiate(impactVFX, collision.contacts[0].point, Quaternion.LookRotation(collision.contacts[0].normal));
                 Destroy(vfx, impactVFXLifetime);
             }
-    
-            // Détruire la balle après impact
+            
             Destroy(gameObject);
         }
 }
