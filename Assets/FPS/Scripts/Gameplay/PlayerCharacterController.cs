@@ -95,7 +95,10 @@ namespace Unity.FPS.Gameplay
 
         [Tooltip("Damage recieved when falling at the maximum speed")]
         public float FallDamageAtMaxSpeed = 50f;
-
+        
+        [Header("Animator")]
+        public Animator PlayerAnimator;
+        
         public UnityAction<bool> OnStanceChanged;
 
         public Vector3 CharacterVelocity { get; set; }
@@ -383,6 +386,12 @@ namespace Unity.FPS.Gameplay
                 m_LatestImpactSpeed = CharacterVelocity;
 
                 CharacterVelocity = Vector3.ProjectOnPlane(CharacterVelocity, hit.normal);
+            }
+            if (PlayerAnimator != null)
+            {
+                Vector3 horizontalVelocity = Vector3.ProjectOnPlane(CharacterVelocity, Vector3.up);
+                bool isWalking = horizontalVelocity.magnitude > 0.1f;
+                PlayerAnimator.SetBool("isWalking", isWalking);
             }
         }
 

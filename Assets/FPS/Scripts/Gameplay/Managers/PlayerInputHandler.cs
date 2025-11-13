@@ -25,6 +25,8 @@ namespace Unity.FPS.Gameplay
         [SerializeField]
         private PlayerInput inputs;
         
+        
+        
         GameFlowManager m_GameFlowManager;
         PlayerCharacterController m_PlayerCharacterController;
         bool m_FireInputWasHeld;
@@ -93,7 +95,7 @@ namespace Unity.FPS.Gameplay
 
                 return move;
             }
-
+            
             return Vector3.zero;
         }
 
