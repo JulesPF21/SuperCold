@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class MoovingTarget : MonoBehaviour, IFreezable
 {
-    private Rigidbody _rb;
-
+    
+    public Rigidbody RigidBody { get; private set; }
     private float speed = 3f;        
     private float amplitude = 7f;    
     private bool freeze = false;     
@@ -22,21 +22,16 @@ public class MoovingTarget : MonoBehaviour, IFreezable
     {
         if (!freeze)
         {
-            _rb.isKinematic = false;
             time += Time.deltaTime * speed;
             float x = Mathf.PingPong(time, amplitude * 2f) - amplitude;
             transform.position = startPos + new Vector3(x, 0f, 0f);
-        }
-        else
-        {
-            _rb.isKinematic = true;
         }
     
 }
     private void Awake()
     {
         CanFreeze = true;
-        _rb = GetComponent<Rigidbody>();
+        RigidBody = GetComponent<Rigidbody>();
     }
     
     public void Freeze()

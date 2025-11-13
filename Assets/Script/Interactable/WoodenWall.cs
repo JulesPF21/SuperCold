@@ -5,6 +5,7 @@ using UnityEngine;
 public class WoodenWall : MonoBehaviour, IFlammable, IFreezable
 {
     private Vector3 CurrentScale;
+    public Rigidbody RigidBody { get; private set; }
 
     [field: SerializeField] 
     public int TimeToBurn { get; private set; }
@@ -14,6 +15,7 @@ public class WoodenWall : MonoBehaviour, IFlammable, IFreezable
 
     private void Awake()
     {
+        RigidBody = GetComponent<Rigidbody>();
         CanFreeze = true;
         canBurn = true;
     }
