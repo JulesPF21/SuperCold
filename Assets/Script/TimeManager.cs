@@ -7,7 +7,8 @@ using UnityEngine.InputSystem;
 public class TimeManager : MonoBehaviour
 {
     [Header("Timing Settings")]
-    public float freezeDuration = 5f; 
+    public float freezeDuration = 5f;
+    public float freeTime = 2f;
     public float freeMovementDuration = 1f; 
     public GameObject player1;
     public GameObject player2;
@@ -17,7 +18,7 @@ public class TimeManager : MonoBehaviour
     private GameObject otherPlayer;
     private List<FreezeableProjectile> frozenProjectiles = new List<FreezeableProjectile>();
 
-    private enum Phase { PlayerTurn, ProjectilePhase }
+    private enum Phase { PlayerTurn, FreeTurn, ProjectilePhase }
     private Phase currentPhase = Phase.PlayerTurn;
     
     
@@ -44,6 +45,12 @@ public class TimeManager : MonoBehaviour
 
         yield return new WaitForSecondsRealtime(freezeDuration);
 
+        currentPhase = Phase.FreeTurn;
+        SetPlayerInput(otherPlayer, true);
+        SetPlayerInput(currentPlayer, true);
+        isTimeFrozen = true;
+        
+        yield return new WaitForSecondsRealtime(freeTime);
         
         currentPhase = Phase.ProjectilePhase;
         SetPlayerInput(otherPlayer, false);
