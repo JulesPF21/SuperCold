@@ -2,25 +2,16 @@ using UnityEngine;
 
 public class FreezeableProjectile : MonoBehaviour
 {
-<<<<<<< HEAD
     private Rigidbody rb;
     private bool isFrozen = false;
     private Vector3 savedVelocity;
     private Vector3 savedAngularVelocity;
 
     private void Awake()
-=======
-    public Rigidbody rb;
-    private Vector3 savedVelocity;
-    private bool isFrozen = false;
-
-    void Awake()
->>>>>>> Quentin
     {
         rb = GetComponent<Rigidbody>();
     }
 
-<<<<<<< HEAD
     private void Update()
     {
         if (TimeManager.isTimeFrozen && !isFrozen)
@@ -31,19 +22,10 @@ public class FreezeableProjectile : MonoBehaviour
         {
             Unfreeze();
         }
-=======
-    void FixedUpdate()
-    {
-        if (isFrozen)
-            rb.linearVelocity = Vector3.zero;
-        else
-            savedVelocity = rb.linearVelocity;
->>>>>>> Quentin
     }
 
     public void Freeze()
     {
-<<<<<<< HEAD
         if (isFrozen) return;
         isFrozen = true;
 
@@ -59,15 +41,10 @@ public class FreezeableProjectile : MonoBehaviour
             rb.collisionDetectionMode = CollisionDetectionMode.Discrete;
             rb.isKinematic = true;
         }
-=======
-        isFrozen = true;
-        rb.isKinematic = true;
->>>>>>> Quentin
     }
 
     public void Unfreeze()
     {
-<<<<<<< HEAD
         if (!isFrozen) return;
         isFrozen = false;
 
@@ -79,10 +56,5 @@ public class FreezeableProjectile : MonoBehaviour
             rb.linearVelocity = savedVelocity;
             rb.angularVelocity = savedAngularVelocity;
         }
-=======
-        isFrozen = false;
-        rb.isKinematic = false;
-        rb.linearVelocity = savedVelocity;
->>>>>>> Quentin
     }
 }
