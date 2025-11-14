@@ -65,7 +65,7 @@ public class FireBall : MonoBehaviour
 
     private IEnumerator Hit()
     {
-        yield return new WaitForSecondsRealtime(5f);
+        yield return new WaitForSecondsRealtime(15f);
         Destroy(vfx);
         Destroy(groundVfx);
         Destroy(gameObject);
