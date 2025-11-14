@@ -12,7 +12,7 @@ namespace Unity.FPS.Game
         public CanvasGroup EndGameFadeCanvasGroup;
 
         [Header("Win")] [Tooltip("This string has to be the name of the scene you want to load when winning")]
-        public string WinSceneName = "WinScene";
+        public string WinSceneName = "IntroMenu";
 
         [Tooltip("Duration of delay before the fade-to-black, if winning")]
         public float DelayBeforeFadeToBlack = 4f;
@@ -25,7 +25,7 @@ namespace Unity.FPS.Game
         [Tooltip("Sound played on win")] public AudioClip VictorySound;
 
         [Header("Lose")] [Tooltip("This string has to be the name of the scene you want to load when losing")]
-        public string LoseSceneName = "LoseScene";
+        public string LoseSceneName = "IntroMenu";
 
 
         public bool GameIsEnding { get; private set; }

@@ -1,4 +1,6 @@
-﻿using Unity.FPS.Game;
+﻿using System;
+using System.Collections;
+using Unity.FPS.Game;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -217,6 +219,23 @@ namespace Unity.FPS.Gameplay
             UpdateCharacterHeight(false);
 
             HandleCharacterMovement();
+        }
+
+        private void OnTriggerEnter(Collider other)
+        {
+            if (other.CompareTag("Fire"))
+            {
+                StartCoroutine(Burning());
+            }
+        }
+
+        private IEnumerator Burning()
+        {
+            for (var i = 0; i < 4; i++)
+            {
+                m_Health.TakeDamage(3f, null);
+                yield return new WaitForSecondsRealtime(1f);
+            }
         }
 
         void OnDie()
@@ -483,4 +502,5 @@ namespace Unity.FPS.Gameplay
             return true;
         }
     }
+    
 }
