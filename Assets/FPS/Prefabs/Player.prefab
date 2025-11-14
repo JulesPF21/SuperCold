@@ -586,7 +586,7 @@ MonoBehaviour:
   AccelerationSpeedInAir: 25
   SprintSpeedModifier: 1.5
   KillHeight: -50
-  RotationSpeed: 200
+  RotationSpeed: 100
   AimingRotationMultiplier: 0.4
   JumpForce: 9
   CameraHeightRatio: 0.8
