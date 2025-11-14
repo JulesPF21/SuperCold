@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: -4486288535886746820}
   - component: {fileID: 820223762079940416}
   - component: {fileID: 4961395972696200552}
+  - component: {fileID: 336186159560899817}
   m_Layer: 15
   m_Name: FireBall
   m_TagString: Untagged
@@ -100,7 +101,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 629921761124712509}
   serializedVersion: 5
-  m_Mass: 1
+  m_Mass: 5
   m_LinearDamping: 0
   m_AngularDamping: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -155,3 +156,16 @@ MonoBehaviour:
   radius: 10
   VFXprefab: {fileID: 1121192042590650, guid: e1b08032bec16ba4eb1ae23cbd572664, type: 3}
   VFXground: {fileID: 1956197547661106, guid: f293a2dcc753a4a489fefe7f8f312d69, type: 3}
+  speed: 20
+--- !u!114 &336186159560899817
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 629921761124712509}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65802bc8eebfce341968490e85a6e863, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FreezeableProjectile

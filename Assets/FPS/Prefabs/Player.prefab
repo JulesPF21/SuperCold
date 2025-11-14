@@ -482,6 +482,7 @@ GameObject:
   - component: {fileID: 1272397862697293493}
   - component: {fileID: 1661717823}
   - component: {fileID: 4054881547877573638}
+  - component: {fileID: 6409610824515461581}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -586,7 +587,7 @@ MonoBehaviour:
   AccelerationSpeedInAir: 25
   SprintSpeedModifier: 1.5
   KillHeight: -50
-  RotationSpeed: 200
+  RotationSpeed: 100
   AimingRotationMultiplier: 0.4
   JumpForce: 9
   CameraHeightRatio: 0.8
@@ -952,6 +953,29 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &6409610824515461581
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7253983127304857660}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b72949a5a84cd814c96eb31e9bfb8ef7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ThrowingTutorial
+  cam: {fileID: 8694137560673455815}
+  attackPoint: {fileID: 3891163784698469781}
+  objectToThrow1: {fileID: 629921761124712509, guid: 1a8100728dd94414eacc144a2e478e3b,
+    type: 3}
+  objectToThrow2: {fileID: 2660932444765820116, guid: 7e8fa8168b196d749b1fb5b361d9ee56,
+    type: 3}
+  totalThrows: 3
+  throwCooldown: 3
+  throwForce: 25
+  throwUpwardForce: 3
+  playerInput: {fileID: 3684709380238314104}
 --- !u!1 &7383874627095517793
 GameObject:
   m_ObjectHideFlags: 0

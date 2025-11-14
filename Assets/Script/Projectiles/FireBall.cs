@@ -13,7 +13,9 @@ public class FireBall : MonoBehaviour
     private GameObject vfx;
     private GameObject groundVfx;
     private Rigidbody rb;
+    public float speed = 20f;
     private MeshRenderer meshRenderer;
+    private Vector3 m_Velocity;
     private void OnCollisionEnter(Collision other)
     {
         rb.isKinematic = true;
@@ -50,7 +52,7 @@ public class FireBall : MonoBehaviour
         
         while (timer < flammable.TimeToBurn)
         {
-            timer += Time.deltaTime;
+            timer += Time.unscaledDeltaTime;
             flammable.SetBurnedProgress(timer / flammable.TimeToBurn);
             yield return null;
         }
@@ -63,7 +65,7 @@ public class FireBall : MonoBehaviour
 
     private IEnumerator Hit()
     {
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSecondsRealtime(5f);
         Destroy(vfx);
         Destroy(groundVfx);
         Destroy(gameObject);
@@ -74,5 +76,27 @@ public class FireBall : MonoBehaviour
         Debug.Log("j'existe");
         rb = GetComponent<Rigidbody>();
         meshRenderer = GetComponent<MeshRenderer>();
+    }
+    private void OnEnable()
+    {
+        m_Velocity = transform.forward * speed;
+    }
+    
+    void FixedUpdate()
+    {
+            
+        if(rb.isKinematic)
+            return;
+            
+        if (m_Velocity != Vector3.zero)
+        {
+            rb.linearVelocity = m_Velocity;
+            m_Velocity = Vector3.zero; 
+        }
+
+        if (!TimeManager.isTimeFrozen)
+        {
+            rb.useGravity = true;
+        }
     }
 }
