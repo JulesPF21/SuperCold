@@ -8,7 +8,7 @@ namespace Unity.FPS.Gameplay
     {
         
         [Header("Paramètres généraux")]
-        public float life = 1000f;
+        public float life = 100000f;
         public float speed = 20f;
         public float damage = 25f;
         
